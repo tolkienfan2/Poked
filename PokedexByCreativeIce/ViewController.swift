@@ -59,8 +59,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 pokemon.append(poke)
             }
             
-            print(rows)
-            
         } catch let err as NSError {
             print(err.debugDescription)
         }
