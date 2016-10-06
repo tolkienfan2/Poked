@@ -162,8 +162,7 @@ class Pokemon {
                     for object in types {
                         if let type = object["type"] as? [String: Any] {
                             if let pokemonType = type["name"] as? String {
-                                print(pokemonType)
-                                
+                                print(pokemonType)      // SHOWS DATA CORRECTLY PARSED
                             }
                         }
                     }
