@@ -21,7 +21,7 @@ class Pokemon {
     fileprivate var _nextEvolutionTxt: String!
     fileprivate var _nextEvolutionId: String!
     fileprivate var _nextEvolutionLvl: String!
-    fileprivate var _pokemonUrl: String!
+//    fileprivate var _pokemonUrl: String!
     
     var name: String {
         get {
@@ -116,59 +116,57 @@ class Pokemon {
         }
     }
     
+//    var pokemonUrl: String {
+//        get {
+//            if _pokemonUrl == nil {
+//                _pokemonUrl = ""
+//            }
+//            return _pokemonUrl
+//        }
+//    }
+//    
+    var pokemonStat: PokemonStat!
+    var pokemonStats = [PokemonStat]()
+    
     init(name: String, pokedexId: Int) {
         self._name = name
         self._pokedexId = pokedexId
-        
-        _pokemonUrl = "\(URL_BASE)\(URL_POKEMON)\(self._pokedexId)/"
     }
     
-    func downloadPokemonDetails(_ completed: @escaping DownloadComplete) {
+    func downloadPokemonDetails(completed: @escaping DownloadComplete) {
         
-        let url = URL (string: _pokemonUrl)!
+        let url = URL(string: URL_BASE.appending("\(pokedexId)/"))!
         Alamofire.request(url).responseJSON { response in
             
             let result = response.result
             
-            if let dict = result.value as? Dictionary<String, AnyObject> {
+            if let dict = result.value as? [String: Any] {
                 
-                if let weight = dict["weight"] as? String {
-                self._weight = weight
+                if let weight = dict["weight"] as? Int {
+                self._weight = String(weight)
                 }
                 
-                if let height = dict["height"] as? String {
-                    self._height = height
+                if let height = dict["height"] as? Int {
+                    self._height = String(height)
                 }
- 
-                if let attack = dict["attack"] as? Int {
-                    self._attack = "\(attack)"
-                }
-
-                if let defense = dict["defense"] as? Int {
+                
+                if let stats = dict["stats"] as? [[String: Any]] {
                     
-                    self._defense = "\(defense)"
-                }
-
-                if let types = dict["types"] as? [Dictionary<String,String>] , types.count > 0 {
-                    
-                    if let type = types[0]["name"] {
-                        
-                        self._type = type
+                    for stat in stats {
+                        let pokemonStat = PokemonStat(statsDict: stat)
+                        self.pokemonStats.append(pokemonStat)
                     }
-                    
-                    if types.count > 1 {
-                        
-                        for x in 1 ..< types.count {
-                            if let type = types[x]["name"] {
-                                self._type! += "/\(type)"
+                }
+
+                if let types = dict["types"] as? [[String: Any]] {
+                    for object in types {
+                        if let type = object["type"] as? [String: Any] {
+                            if let pokemonType = type["name"] as? String {
+                                print(pokemonType)
+                                
                             }
                         }
-                        
-                    } else {
-                        
-                        //self._type = ""
                     }
-                    
                 }
                 
                 if let descArr = dict["descriptions"] as? [Dictionary<String, String>] , descArr.count > 0 {
@@ -186,8 +184,6 @@ class Pokemon {
                                     self._description = description
                                 }
                             }
-                            
-                            completed()
                         }
                     
                     } else {
@@ -220,6 +216,7 @@ class Pokemon {
 
                 }
             }
+            completed()
         }
     }
 }

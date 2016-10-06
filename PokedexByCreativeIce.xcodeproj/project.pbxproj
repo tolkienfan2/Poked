@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4544650A1DA35B64000263F6 /* PokemonStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454465091DA35B64000263F6 /* PokemonStat.swift */; };
 		458851D81CB1FEB80058612C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458851D71CB1FEB80058612C /* Constants.swift */; };
 		45A23D9A1CAE9B0D00B5FE9D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A23D991CAE9B0D00B5FE9D /* AppDelegate.swift */; };
 		45A23D9C1CAE9B0D00B5FE9D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A23D9B1CAE9B0D00B5FE9D /* ViewController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		454465091DA35B64000263F6 /* PokemonStat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonStat.swift; sourceTree = "<group>"; };
 		458851D71CB1FEB80058612C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		45A23D961CAE9B0D00B5FE9D /* PokedexByCreativeIce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokedexByCreativeIce.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45A23D991CAE9B0D00B5FE9D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				45A23DAE1CAE9F9000B5FE9D /* Pokemon.swift */,
+				454465091DA35B64000263F6 /* PokemonStat.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45A23DB21CAEA7FA00B5FE9D /* PokeCell.swift in Sources */,
+				4544650A1DA35B64000263F6 /* PokemonStat.swift in Sources */,
 				45A23D9C1CAE9B0D00B5FE9D /* ViewController.swift in Sources */,
 				45A23D9A1CAE9B0D00B5FE9D /* AppDelegate.swift in Sources */,
 				45A23DBD1CAF71FF00B5FE9D /* PokemonDetailVC.swift in Sources */,

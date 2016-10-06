@@ -24,21 +24,24 @@ class PokemonDetailVC: UIViewController {
     @IBOutlet weak var evoLbl: UILabel!
     
     var pokemon: Pokemon!
+    var pokemonStat: PokemonStat!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         nameLbl.text = pokemon.name.capitalized
+
         let img = UIImage(named: "\(pokemon.pokedexId)")
         mainImg.image = img
         currentEvoImg.image = img
-        
+
         pokemon.downloadPokemonDetails { () -> () in
             self.updateUI()
         }
     }
     
     func updateUI() {
+
         pokedexLbl.text = "\(pokemon.pokedexId)"
         descLbl.text = pokemon.description
         typeLbl.text = pokemon.type

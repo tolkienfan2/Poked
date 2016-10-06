@@ -69,6 +69,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PokeCell", for: indexPath) as? PokeCell {
             
             let poke: Pokemon!
+            
             if inSearchMode {
                 poke = filteredPokemon[(indexPath as NSIndexPath).row]
             } else {
@@ -77,14 +78,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             
             cell.configureCell(poke)
             return cell
+            
         }  else {
+            
             return UICollectionViewCell()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        var poke: Pokemon!
+        let poke: Pokemon!
         
         if inSearchMode {
             
@@ -94,8 +97,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             
             poke = pokemon[(indexPath as NSIndexPath).row]
         }
+        print("CHOSEN POKEMON IS \(poke.name)")
+        performSegue(withIdentifier: "pokemonDetail", sender: poke)
         
-        performSegue(withIdentifier: "PokemonDetailVC", sender: poke)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -107,7 +111,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         } else {
             
             return pokemon.count
-            
         }
         
     }
@@ -121,16 +124,27 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return CGSize(width: 105, height: 105)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "pokemonDetail" {
+            if let pokemonDetailVC = segue.destination as? PokemonDetailVC {
+                if let poke = sender as? Pokemon {
+                    pokemonDetailVC.pokemon = poke
+                }
+            }
+        }
+    }
+    
     @IBAction func musicBtnPressed(_ sender: UIButton!) {
         
         if musicPlayer.isPlaying {
             musicPlayer.stop()
             sender.alpha = 0.4
+
         } else {
+
             musicPlayer.play()
             sender.alpha = 1.0
         }
-        
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -151,16 +165,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             let lower = searchBar.text!.lowercased()
             filteredPokemon = pokemon.filter({$0.name.range(of: lower) != nil})
             collection.reloadData()
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "PokemonDetailVC" {
-            if let detailsVC = segue.destination as? PokemonDetailVC {
-                if let poke = sender as? Pokemon {
-                    detailsVC.pokemon = poke
-                }
-            }
         }
     }
 }
