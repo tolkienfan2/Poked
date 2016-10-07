@@ -21,7 +21,6 @@ class Pokemon {
     fileprivate var _nextEvolutionTxt: String!
     fileprivate var _nextEvolutionId: String!
     fileprivate var _nextEvolutionLvl: String!
-//    fileprivate var _pokemonUrl: String!
     
     var name: String {
         get {
@@ -116,15 +115,6 @@ class Pokemon {
         }
     }
     
-//    var pokemonUrl: String {
-//        get {
-//            if _pokemonUrl == nil {
-//                _pokemonUrl = ""
-//            }
-//            return _pokemonUrl
-//        }
-//    }
-//    
     var pokemonStat: PokemonStat!
     var pokemonStats = [PokemonStat]()
     
